@@ -7,13 +7,23 @@ from ckeditor.fields import RichTextField
 
 
 class CategoryModel(models.Model):
+    master_category = models.ForeignKey('self', on_delete=models.CASCADE, related_name='master', null=True, blank=True)
     title = models.CharField(_('Title'), max_length=50)
     description = RichTextField(_('Description', ), blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return self.title
+        full_path = [self.title]
+        k = self.master_category
+        while k is not None:
+            full_path.append(k.title)
+            k = k.master_category
 
+        return ' -> '.join(full_path[::-1])
+
+    # def __str__(self):
+    #     return self.title
+    #
 
 class ProductModel(models.Model):
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, related_name='category', null=False)
