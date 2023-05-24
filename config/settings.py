@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     # 3rd party
     'ckeditor',
+    'jalali_date'
 ]
 
 MIDDLEWARE = [

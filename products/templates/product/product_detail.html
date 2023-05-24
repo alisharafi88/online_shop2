@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load jalali_tags %}
 {% load comment_tag %}
 {% load i18n %}
 
@@ -124,8 +125,8 @@
 															<div class="d-flex flex-sm-row flex-row">
 																<img src="{{ product.cover.url }}" alt="Review Avatar" class="review__avatar">
 																<div>
-																	<div class="review__meta">
-																		<span class="review__published-date">{{ comment.datetime_modified }}</span>
+																	<div class="review__meta" dir="ltr">
+																		<span class="review__published-date">{{ comment.datetime_modified|to_jalali:'%Y/%B/%d'}}</span>
 																		<span class="review__dash">-</span>
 																		<strong class="review__author px-4">{{ comment.user.nick_name }}</strong>
 

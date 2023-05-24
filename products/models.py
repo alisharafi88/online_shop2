@@ -15,11 +15,12 @@ class CategoryModel(models.Model):
     def __str__(self):
         full_path = [self.title]
         k = self.master_category
-        while k is not None:
+        if k:
             full_path.append(k.title)
             k = k.master_category
+            return ' -> '.join(full_path[::-1])
+        return self.title
 
-        return ' -> '.join(full_path[::-1])
 
     # def __str__(self):
     #     return self.title
